@@ -60,3 +60,52 @@ class Solution {
         return nums[start];
     }
 }
+
+
+// question 3 Search in rotated sorted array
+
+solution -> 
+class Solution {
+    public int search(int[] nums, int target) {
+        int start = 0;
+        int end = nums.length - 1;
+        int peak = pivot(nums);
+        int ans = binarySearch(nums, target, start, peak);
+        if(ans != -1){
+            return ans;
+        }else{
+           return binarySearch(nums, target, peak + 1, end);
+
+        }
+    }
+    public int pivot(int[] nums){
+        int start = 0;
+        int end = nums.length - 1;
+        while(start < end){
+            int mid = start + (end - start)/2;
+            if(mid < end && nums[mid] > nums[mid + 1]){
+                return mid;
+            }if(mid > start && nums[mid] < nums[mid - 1]){
+                return mid - 1;
+            }if(nums[mid] <= nums[start]){
+                end = mid - 1;
+            }else{
+                start = mid + 1;
+            }
+        }
+        return nums.length -1;
+    }
+    public int binarySearch(int[] nums, int target, int start, int end){
+        while(start <= end){
+            int mid = start + (end - start)/2;
+            if(target == nums[mid]){
+                return mid;
+            }else if(target < nums[mid]){
+                end = mid - 1;
+            }else{
+                start = mid + 1;
+            }
+        }
+        return -1;
+    }
+}
