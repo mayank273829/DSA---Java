@@ -19,3 +19,28 @@ class Solution {
       return nums;
     }
 }
+
+question 2 Selection Sort 
+Given an array of integers nums, sort the array in non-decreasing order using the selection sort algorithm and return the sorted array.
+A sorted array in non-decreasing order is an array where each element is greater than or equal to all previous elements in the array.
+
+solution 
+
+class Solution {
+    public int[] selectionSort(int[] nums) {
+        int n = nums.length;
+
+        for(int i = 0; i < n - 1; i++){
+            int smallestIdx = i; //unsorted part starting point
+            for(int j = i + 1; j < n; j++){
+                if(nums[j] < nums[smallestIdx]){
+                    smallestIdx = j;
+                }
+            }
+            int temp = nums[i];
+            nums[i] = nums[smallestIdx];
+            nums[smallestIdx] = temp;
+        }
+        return nums;
+    }
+}
